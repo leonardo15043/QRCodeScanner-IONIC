@@ -26,7 +26,7 @@ export class HomePage {
     console.log("Realizando scan");
 
     if( !this.platform.is('cordova') ){
-      this._historial.agregar_historial("http://google.com");
+      this._historial.agregar_historial("https://google.com");
       return;
     }
 
@@ -36,8 +36,9 @@ export class HomePage {
      console.log('Result: ', barcodeData.text );
      console.log('Format: ', barcodeData.format );
      console.log('Result: ', barcodeData.text );
-
-     if( barcodeData.cancelled == true && barcodeData.text != null ){
+    console.log(barcodeData.cancelled);
+     if( barcodeData.cancelled == 0 && barcodeData.text != null ){
+       console.log("hola");
         this._historial.agregar_historial( barcodeData.text );
      }
 

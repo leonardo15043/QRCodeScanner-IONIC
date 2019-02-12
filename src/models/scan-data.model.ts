@@ -8,8 +8,8 @@ export class ScanData{
         this.tipo = "no definido";
         this.info = texto;
 
-        if( texto.startsWith("http")){
-            this.tipo = "http";
+        if( texto.startsWith("https")){
+            this.tipo = "https";
         }
     }
 }
