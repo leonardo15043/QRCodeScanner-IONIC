@@ -15,6 +15,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { AgmCoreModule } from '@agm/core';
 
+import { Contacts } from '@ionic-native/contacts';
+
+
 
 @NgModule({
   declarations: [
@@ -45,7 +48,8 @@ import { AgmCoreModule } from '@agm/core';
     BarcodeScanner,
     InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HistorialProvider
+    HistorialProvider,
+    Contacts
   ]
 })
 export class AppModule {}
