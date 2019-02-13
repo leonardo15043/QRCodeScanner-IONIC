@@ -10,6 +10,8 @@ export class ScanData{
 
         if( texto.startsWith("https")){
             this.tipo = "https";
+        }else if( texto.startsWith("geo")){
+            this.tipo = "mapa";
         }
-    }
+    } 
 }

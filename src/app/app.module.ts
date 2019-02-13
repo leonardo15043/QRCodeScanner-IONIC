@@ -13,6 +13,9 @@ import { HistorialProvider } from '../providers/historial/historial';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
+import { AgmCoreModule } from '@agm/core';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -23,7 +26,10 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA4ZfezBNDBvCzjNuBas2lMU0C4r1_wBpk'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

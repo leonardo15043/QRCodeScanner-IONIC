@@ -37,14 +37,14 @@ export class HomePage {
      console.log('Format: ', barcodeData.format );
      console.log('Result: ', barcodeData.text );
     console.log(barcodeData.cancelled);
-     if( barcodeData.cancelled == 0 && barcodeData.text != null ){
+     if(barcodeData.text != null ){
        console.log("hola");
         this._historial.agregar_historial( barcodeData.text );
      }
 
      }).catch(err => {
          this.alerta('Error: '+err);
-     });
+     }); 
 
   }
 
