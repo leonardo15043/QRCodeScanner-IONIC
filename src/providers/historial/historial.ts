@@ -9,6 +9,7 @@ import { ModalController , Platform , ToastController } from 'ionic-angular';
 import { MapaPage } from '../../pages/mapa/mapa';
 
 import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 
 
@@ -21,8 +22,8 @@ export class HistorialProvider {
     private iab: InAppBrowser,
     private modalCtrl:ModalController,
     private contacts: Contacts,
-    private platform:Platform,
-    private toastCtrl:ToastController
+    private toastCtrl:ToastController,
+    private emailComposer:EmailComposer
     ) {
     
   }
@@ -38,8 +39,6 @@ export class HistorialProvider {
 
   abrir_scan( index:number ){
     let scanData = this._historial[index];
-
-    console.log(scanData.tipo);  
 
     switch( scanData.tipo ){
 
@@ -61,6 +60,12 @@ export class HistorialProvider {
 
       break
 
+      case "correo":
+
+      this.enviar_correo( scanData.info );
+
+      break
+
       default:
 
       console.log("Tipo no soportado");
@@ -69,19 +74,39 @@ export class HistorialProvider {
 
   }
 
+  private enviar_correo( texto:string ){
+
+    console.log("correo enviado");
+    console.log(texto);
+
+    let contactArray = texto.split(";");
+    let correo = contactArray[0].replace("MATMSG:TO:","");
+    let asunto = contactArray[1].replace("SUB:","");
+    let mensaje = contactArray[2].replace("BODY:","");
+
+        let email = {
+          to: correo,
+          cc: [],
+          bcc: [],
+          attachment: [],
+          subject: asunto,
+          body: mensaje,
+          isHtml: false,
+          app: "Gmail"
+        };
+          
+        this.emailComposer.open(email).then(
+          () => this.crear_alerta("El correo fue enviado correctamente"),
+          (error) => this.crear_alerta( "Error: "+error )
+        )
+    
+  }
 
   private crear_contacto( texto:string ){
     let campos:any = this.parse_vcard( texto );
-    console.log( campos );
-
 
     let nombre = campos['fn'];
     let tel = campos.tel[0].value[0];
-
-    if( !this.platform.is('cordova')){
-      console.log('Estoy en la computadora , no puedo crear contacto');
-      return;
-    }
 
     let contact: Contact = this.contacts.create();
 
@@ -103,6 +128,7 @@ export class HistorialProvider {
     }).present();
 
   }
+
 
   private parse_vcard( input:string ) {
   

@@ -5,6 +5,7 @@ export class ScanData{
     tipo:string;
 
     constructor( texto:string ){
+
         this.tipo = "no definido";
         this.info = texto;
 
@@ -14,6 +15,9 @@ export class ScanData{
             this.tipo = "mapa";
         }else if( texto.startsWith("BEGIN:VCARD")){
             this.tipo = "contacto"
+        }else if( texto.startsWith("MATMSG:TO")){
+            this.tipo = "correo"
         }
+
     } 
 }

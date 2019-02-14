@@ -16,6 +16,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AgmCoreModule } from '@agm/core';
 
 import { Contacts } from '@ionic-native/contacts';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 
 
@@ -49,7 +50,8 @@ import { Contacts } from '@ionic-native/contacts';
     InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HistorialProvider,
-    Contacts
+    Contacts,
+    EmailComposer
   ]
 })
 export class AppModule {}
